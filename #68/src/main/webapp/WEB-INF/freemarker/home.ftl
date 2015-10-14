@@ -28,16 +28,3 @@
     </body>
 
 </html>
-
-<!--
-<label for="matan"> Math-l an-s </label>
-                <input type="radio" name="subject" id="matan" value=1>
-                <label for="discr"> Discrete math </label>
-                <input type="radio" name="subject" id="discr" value=2>
-                <label for="algem"> Algebra&Geom </label>
-                <input type="radio" name="subject" id="algem" value=3>
-                <label for="algr"> Alg-s&DataStructs </label>
-                <input type="radio" name="subject" id="algr" value=4>
-                <label for="progr"> Programming </label>
-                <input type="radio" name="subject" id="progr" value=5>
--->
