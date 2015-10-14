@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.0" author="Aidar">
+        <comment>
+            Tables students and scores are being created and filled.
+        </comment>
+
+        <sql>
+            CREATE TABLE students (
+            id INT NOT NULL PRIMARY KEY ,
+            first_name VARCHAR(20) NOT NULL ,
+            surname VARCHAR(20) NOT NULL ,
+            last_name VARCHAR(20) NOT NULL ,
+            stud_group VARCHAR(20) NOT NULL
+            );
+
+            CREATE TABLE scores (
+            id INT NOT NULL PRIMARY KEY ,
+            subject_type ENUM('ENGLISH', 'MATAN', 'DISCR', 'ALGEM', 'ALGR', 'PROGR') NOT NULL,
+            score INT NOT NULL,
+            student_id INT NOT NULL,
+            FOREIGN KEY (student_id) REFERENCES students (id)
+            );
+
+            INSERT INTO students VALUES (1, "Aidar", "Sh", "Ild", "11-401");
+            INSERT INTO students VALUES (2, "Max", "Andr", "Mikh", "11-402");
+            INSERT INTO students VALUES (3, "John", "Wick", "Derby", "11-403");
+
+            INSERT INTO scores VALUES (0, "ENGLISH", 100, 1);
+            INSERT INTO scores VALUES (1, "MATAN", 90, 1);
+            INSERT INTO scores VALUES (2, "DISCR", 80, 1);
+            INSERT INTO scores VALUES (3, "ALGEM", 70, 1);
+            INSERT INTO scores VALUES (4, "ALGR", 60, 1);
+            INSERT INTO scores VALUES (5, "PROGR", 50, 1);
+
+            INSERT INTO scores VALUES (6, "ENGLISH", 50, 2);
+            INSERT INTO scores VALUES (7, "MATAN", 40, 2);
+            INSERT INTO scores VALUES (8, "DISCR", 30, 2);
+            INSERT INTO scores VALUES (9, "ALGEM", 20, 2);
+            INSERT INTO scores VALUES (10, "ALGR", 10, 2);
+            INSERT INTO scores VALUES (11, "PROGR", 0, 2);
+
+            INSERT INTO scores VALUES (12, "ENGLISH", 50, 3);
+            INSERT INTO scores VALUES (13, "MATAN", 55, 3);
+            INSERT INTO scores VALUES (14, "DISCR", 60, 3);
+            INSERT INTO scores VALUES (15, "ALGEM", 65, 3);
+            INSERT INTO scores VALUES (16, "ALGR", 70, 3);
+            INSERT INTO scores VALUES (17, "PROGR", 75, 3);
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
