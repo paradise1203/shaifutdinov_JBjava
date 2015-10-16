@@ -33,7 +33,7 @@ public class ScoreRepositoryImpl implements ScoreRepositoryCustom {
     public Integer getParticularScore(Integer id, Subject subject) {
         Query query = entityManager.createNativeQuery("SELECT score FROM scores WHERE student_id=? AND subject_type=?");
         query.setParameter(1, id);
-        query.setParameter(2, subject.getType());
+        query.setParameter(2, subject.ordinal());
         return (Integer) query.getSingleResult();
     }
 

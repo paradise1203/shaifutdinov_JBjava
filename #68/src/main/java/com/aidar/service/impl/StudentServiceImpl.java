@@ -15,29 +15,21 @@ import java.math.BigDecimal;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
+    @Qualifier("studentRepository")
     private StudentRepository studentRepository;
 
     @Autowired
     @Qualifier("scoreRepository")
     private ScoreRepository scoreRepository;
 
-    private Student getStudent(String fName, String sName, String lName) {
-        return studentRepository.findByFirstNameAndSurnameAndLastName(fName, sName, lName);
+    private Student getStudent(Student student) {
+        return studentRepository.findByFirstNameAndSurnameAndLastName(student.getFirstName(), student.getSurname(),
+                student.getLastName());
     }
 
     @Override
-    public Integer getParticularScore(String fName, String sName, String lName, Integer subject) {
-        Student student = getStudent(fName, sName, lName);
-        if (student != null) {
-            return scoreRepository.getParticularScore(student.getId(), Subject.getSubject(subject));
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public BigDecimal getAverageScore(String fName, String sName, String lName) {
-        Student student = getStudent(fName, sName, lName);
+    public BigDecimal getAverageScore(Student student) {
+        student = getStudent(student);
         if (student != null) {
             return scoreRepository.getAverageScore(student.getId());
         } else {
@@ -46,10 +38,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Integer getTotalScore(String fName, String sName, String lName) {
-        Student student = getStudent(fName, sName, lName);
+    public Integer getTotalScore(Student student) {
+        student = getStudent(student);
         if (student != null) {
             return scoreRepository.getTotalScore(student.getId());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Integer getParticularScore(Student student, Integer subject) {
+        student = getStudent(student);
+        if (student != null) {
+            return scoreRepository.getParticularScore(student.getId(), Subject.getSubject(subject));
         } else {
             return null;
         }

@@ -1,5 +1,6 @@
 package com.aidar.service;
 
+import com.aidar.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -7,10 +8,10 @@ import java.math.BigDecimal;
 @Service
 public interface StudentService {
 
-    public Integer getTotalScore(String fName, String sName, String lName);
+    public Integer getTotalScore(Student student);
 
-    public BigDecimal getAverageScore(String fName, String sName, String lName);
+    public BigDecimal getAverageScore(Student student);
 
-    public Integer getParticularScore(String fName, String sName, String lName, Integer subject);
+    public Integer getParticularScore(Student student, Integer subject);
 
 }

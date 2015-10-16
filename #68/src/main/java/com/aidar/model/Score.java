@@ -1,5 +1,7 @@
 package com.aidar.model;
 
+import com.aidar.util.Subject;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,27 +9,21 @@ import javax.persistence.*;
 public class Score {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqScore")
+    @SequenceGenerator(name = "seqScore")
     @Column(name = "id")
     private Integer id;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "subject_type")
-    private Enum subjectType;
+    private Subject subjectType;
 
     @Column(name = "score")
     private Integer score;
 
-    @Column(name = "student_id")
-    private Integer studentId;
-
-    public Score() {
-    }
-
-    public Score(Integer id, Enum subjectType, Integer score, Integer studentId) {
-        this.id = id;
-        this.subjectType = subjectType;
-        this.score = score;
-        this.studentId = studentId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     public Integer getId() {
         return id;
@@ -37,11 +33,11 @@ public class Score {
         this.id = id;
     }
 
-    public Enum getSubjectType() {
+    public Subject getSubjectType() {
         return subjectType;
     }
 
-    public void setSubjectType(Enum subjectType) {
+    public void setSubjectType(Subject subjectType) {
         this.subjectType = subjectType;
     }
 
@@ -53,12 +49,12 @@ public class Score {
         this.score = score;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 }

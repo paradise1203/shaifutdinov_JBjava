@@ -1,15 +1,14 @@
 package com.aidar.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "students")
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqStudents")
+    @SequenceGenerator(name = "seqStudents")
     @Column(name = "id")
     private Integer id;
 
@@ -24,17 +23,6 @@ public class Student {
 
     @Column(name = "stud_group")
     private String studGroup;
-
-    public Student() {
-    }
-
-    public Student(Integer id, String firstName, String surname, String lastName, String studGroup) {
-        this.id = id;
-        this.firstName = firstName;
-        this.surname = surname;
-        this.lastName = lastName;
-        this.studGroup = studGroup;
-    }
 
     public Integer getId() {
         return id;
