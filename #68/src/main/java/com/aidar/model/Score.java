@@ -21,7 +21,7 @@ public class Score {
     @Column(name = "score")
     private Integer score;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student;
 
