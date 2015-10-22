@@ -27,7 +27,7 @@ public class EmployeeData {
     @Column(name = "salary")
     private Integer salary;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
 

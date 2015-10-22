@@ -4,20 +4,20 @@ import com.aidar.model.Office;
 
 public interface MedClinicService {
 
-    public Integer getParticularSalary(String fio, Integer type);
+    Integer getParticularSalary(String fio, Integer type);
 
-    public Long getWorkingExperience(String fio, Integer type);
+    Long getWorkingExperience(String fio, Integer type);
 
-    public Double getAverageSalary(String name);
+    Double getAverageSalary(String name);
 
-    public String getMostProfitableClinic();
+    String getMostProfitableClinic();
 
-    public Double getAverageClinicCheck(String name);
+    Double getAverageClinicCheck(String name);
 
-    public String getMostProfitableOffice();
+    String getMostProfitableOffice();
 
-    public Double getAverageOfficeCheck(String city, String street);
+    Double getAverageOfficeCheck(String city, String street);
 
-    public Office getOffice(String city, String street);
+    Office getOffice(String city, String street);
 
 }

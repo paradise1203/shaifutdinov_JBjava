@@ -7,6 +7,15 @@
 
     <changeSet id="1.0" author="Aidar">
         <comment>
+            Create uuid extension.
+        </comment>
+        <sql>
+            CREATE EXTENSION "uuid-ossp";
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.1" author="Aidar">
+        <comment>
             Create med_clinic table.
         </comment>
         <sql>
@@ -19,18 +28,18 @@
         </sql>
     </changeSet>
 
-    <changeSet id="1.1" author="Aidar">
+    <changeSet id="1.2" author="Aidar">
         <comment>
             Fill med_clinic with some info.
         </comment>
         <sql>
-            INSERT INTO med_clinic VALUES (1, "Pol#1", "2015-10-18", 1);
-            INSERT INTO med_clinic VALUES (2, "Pol#2", "2015-10-18", 2);
-            INSERT INTO med_clinic VALUES (3, "Pol#3", "2015-10-18", 3);
+            INSERT INTO med_clinic VALUES (1, 'Pol#1', '2015-10-18', 1);
+            INSERT INTO med_clinic VALUES (2, 'Pol#2', '2015-10-18', 2);
+            INSERT INTO med_clinic VALUES (3, 'Pol#3', '2015-10-18', 3);
         </sql>
     </changeSet>
 
-    <changeSet id="1.2" author="Aidar">
+    <changeSet id="1.3" author="Aidar">
         <comment>
             Create office table.
         </comment>
@@ -44,19 +53,19 @@
         </sql>
     </changeSet>
 
-    <changeSet id="1.3" author="Aidar">
+    <changeSet id="1.4" author="Aidar">
         <comment>
             Fill office with some info.
         </comment>
         <sql>
-            INSERT INTO office VALUES (1, "Kazan", "Yamasheva", 1);
-            INSERT INTO office VALUES (2, "Piter", "Nevskiy", 1);
-            INSERT INTO office VALUES (3, "Kazan", "Gogolya", 2);
-            INSERT INTO office VALUES (4, "Kazan", "Prof", 3);
+            INSERT INTO office VALUES (1, 'Kazan', 'Yamasheva', 1);
+            INSERT INTO office VALUES (2, 'Piter', 'Nevskiy', 1);
+            INSERT INTO office VALUES (3, 'Kazan', 'Gogolya', 2);
+            INSERT INTO office VALUES (4, 'Kazan', 'Prof', 3);
         </sql>
     </changeSet>
 
-    <changeSet id="1.4" author="Aidar">
+    <changeSet id="1.5" author="Aidar">
         <comment>
             Create people table.
         </comment>
@@ -67,29 +76,29 @@
             passport_series VARCHAR(255)        NOT NULL,
             passport_number VARCHAR(255)        NOT NULL,
             passport_issued VARCHAR(255)        NOT NULL,
-            type           VARCHAR(20)         NOT NULL,
+            type           INTEGER        NOT NULL,
             office_id      INTEGER             NOT NULL REFERENCES office (id)
             );
         </sql>
     </changeSet>
 
-    <changeSet id="1.5" author="Aidar">
+    <changeSet id="1.6" author="Aidar">
         <comment>
             Fill people with some info.
         </comment>
         <sql>
-            INSERT INTO people VALUES (1, "Aidar", 1, 1, 1, 0, 1);
-            INSERT INTO people VALUES (2, "Lilya", 2, 2, 2, 0, 2);
-            INSERT INTO people VALUES (3, "Max", 3, 3, 3, 0, 3);
-            INSERT INTO people VALUES (4, "Kate", 4, 4, 4, 0, 4);
-            INSERT INTO people VALUES (5, "John", 5, 5, 5, 1, 1);
-            INSERT INTO people VALUES (6, "Nash", 6, 6, 6, 1, 2);
-            INSERT INTO people VALUES (7, "Max", 7, 7, 7, 1, 3);
-            INSERT INTO people VALUES (8, "Kate", 8, 8, 8, 1, 4);
+            INSERT INTO people VALUES (1, 'Aidar', 1, 1, 1, 0, 1);
+            INSERT INTO people VALUES (2, 'Lilya', 2, 2, 2, 0, 2);
+            INSERT INTO people VALUES (3, 'Max', 3, 3, 3, 0, 3);
+            INSERT INTO people VALUES (4, 'Kate', 4, 4, 4, 0, 4);
+            INSERT INTO people VALUES (5, 'John', 5, 5, 5, 1, 1);
+            INSERT INTO people VALUES (6, 'Nash', 6, 6, 6, 1, 2);
+            INSERT INTO people VALUES (7, 'Max', 7, 7, 7, 1, 3);
+            INSERT INTO people VALUES (8, 'Kate', 8, 8, 8, 1, 4);
         </sql>
     </changeSet>
 
-    <changeSet id="1.6" author="Aidar">
+    <changeSet id="1.7" author="Aidar">
         <comment>
             Create patient_data table.
         </comment>
@@ -103,20 +112,20 @@
         </sql>
     </changeSet>
 
-    <changeSet id="1.7" author="Aidar">
+    <changeSet id="1.8" author="Aidar">
         <comment>
             Fill patient_data with some info.
         </comment>
         <sql>
-            INSERT INTO patient_data VALUES (1, "2020-10-18", 1000, 5);
-            INSERT INTO patient_data VALUES (2, "2020-10-18", 1500, 5);
-            INSERT INTO patient_data VALUES (3, "2020-10-18", 2000, 6);
-            INSERT INTO patient_data VALUES (4, "2020-10-18", 1000, 7);
-            INSERT INTO patient_data VALUES (5, "2020-10-18", 1500, 8);
+            INSERT INTO patient_data VALUES (1, '2020-10-18', 1000, 5);
+            INSERT INTO patient_data VALUES (2, '2020-10-18', 1500, 5);
+            INSERT INTO patient_data VALUES (3, '2020-10-18', 2000, 6);
+            INSERT INTO patient_data VALUES (4, '2020-10-18', 1000, 7);
+            INSERT INTO patient_data VALUES (5, '2020-10-18', 1600, 8);
         </sql>
     </changeSet>
 
-    <changeSet id="1.8" author="Aidar">
+    <changeSet id="1.9" author="Aidar">
         <comment>
             Create stuff_data table.
         </comment>
@@ -132,19 +141,45 @@
         </sql>
     </changeSet>
 
-    <changeSet id="1.9" author="Aidar">
+    <changeSet id="1.10" author="Aidar">
         <comment>
             Fill stuff_data with some info.
         </comment>
         <sql>
-            INSERT INTO stuff_data VALUES (1, "2016-10-18", NULL , 50, 500, 1);
-            INSERT INTO stuff_data VALUES (2, "2016-10-18", "2016-10-20" , 10, 50000, 2);
-            INSERT INTO stuff_data VALUES (3, "2016-10-18", NULL , 100, 100, 3);
-            INSERT INTO stuff_data VALUES (4, "2016-10-18", NULL , 50, 400, 4);
+            INSERT INTO stuff_data VALUES (1, '2016-10-18', NULL , 50, 500, 1);
+            INSERT INTO stuff_data VALUES (2, '2016-10-18', '2016-10-20' , 10, 50000, 2);
+            INSERT INTO stuff_data VALUES (3, '2016-10-18', NULL , 100, 100, 3);
+            INSERT INTO stuff_data VALUES (4, '2016-10-18', NULL , 50, 400, 4);
         </sql>
     </changeSet>
 
-    <changeSet id="1.10" author="Aidar">
+    <changeSet id="1.11" author="Aidar">
+        <comment>
+            Create legal_info table.
+        </comment>
+        <sql>
+            CREATE TABLE legal_info (
+            id               INT PRIMARY KEY NOT NULL,
+            series           VARCHAR(255) NOT NULL,
+            number           VARCHAR(255) NOT NULL,
+            number_uuid VARCHAR(36)  NOT NULL
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.12" author="Aidar">
+        <comment>
+            Fill legal_info with some info.
+        </comment>
+        <sql>
+            INSERT INTO legal_info VALUES (1, 1, 1, uuid_generate_v1mc());
+            INSERT INTO legal_info VALUES (2, 2, 2, uuid_generate_v1mc());
+            INSERT INTO legal_info VALUES (3, 3, 3, uuid_generate_v1mc());
+            INSERT INTO legal_info VALUES (4, 4, 4, uuid_generate_v1mc());
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.13" author="Aidar">
     <comment>
         Create provider table.
     </comment>
@@ -158,19 +193,19 @@
     </sql>
 </changeSet>
 
-    <changeSet id="1.11" author="Aidar">
+    <changeSet id="1.14" author="Aidar">
         <comment>
             Fill provider with some info.
         </comment>
         <sql>
-            INSERT INTO provider VALUES (1, "FedEx", 1, 1);
-            INSERT INTO provider VALUES (2, "PochtaRossii", 2, 1);
-            INSERT INTO provider VALUES (3, "Unicredit", 3, 2);
-            INSERT INTO provider VALUES (4, "Unisef", 4, 3);
+            INSERT INTO provider VALUES (1, 'FedEx', 1, 1);
+            INSERT INTO provider VALUES (2, 'PochtaRossii', 2, 1);
+            INSERT INTO provider VALUES (3, 'Unicredit', 3, 2);
+            INSERT INTO provider VALUES (4, 'Unisef', 4, 3);
         </sql>
     </changeSet>
 
-    <changeSet id="1.12" author="Aidar">
+    <changeSet id="1.15" author="Aidar">
         <comment>
             Create delivery table.
         </comment>
@@ -186,41 +221,15 @@
         </sql>
     </changeSet>
 
-    <changeSet id="1.13" author="Aidar">
+    <changeSet id="1.16" author="Aidar">
         <comment>
             Fill delivery with some info.
         </comment>
         <sql>
-            INSERT INTO delivery VALUES (1, "2015-10-18", NULL, 1, 30, 1);
-            INSERT INTO delivery VALUES (2, "2015-09-18", "2015-09-20", 1, 15, 2);
-            INSERT INTO delivery VALUES (3, "2015-08-18", NULL, 2, 20, 3);
-            INSERT INTO delivery VALUES (4, "2015-07-18", NULL, 3, 10, 4);
-        </sql>
-    </changeSet>
-
-    <changeSet id="1.14" author="Aidar">
-        <comment>
-            Create legal_info table.
-        </comment>
-        <sql>
-            CREATE TABLE legal_info (
-            id               INT PRIMARY KEY NOT NULL,
-            series           VARCHAR(255) NOT NULL,
-            number           VARCHAR(255) NOT NULL,
-            number_uuid VARCHAR(36)  NOT NULL
-            );
-        </sql>
-    </changeSet>
-
-    <changeSet id="1.15" author="Aidar">
-        <comment>
-            Fill legal_info with some info.
-        </comment>
-        <sql>
-            INSERT INTO legal_info VALUES (1, 1, 1, UUID());
-            INSERT INTO legal_info VALUES (2, 2, 2, UUID());
-            INSERT INTO legal_info VALUES (3, 3, 3, UUID());
-            INSERT INTO legal_info VALUES (4, 4, 4, UUID());
+            INSERT INTO delivery VALUES (1, '2015-10-18', NULL, 1, 30, 1);
+            INSERT INTO delivery VALUES (2, '2015-09-18', '2015-09-20' , 1, 15, 2);
+            INSERT INTO delivery VALUES (3, '2015-08-18', NULL, 2, 20, 3);
+            INSERT INTO delivery VALUES (4, '2015-07-18', NULL, 3, 10, 4);
         </sql>
     </changeSet>
 

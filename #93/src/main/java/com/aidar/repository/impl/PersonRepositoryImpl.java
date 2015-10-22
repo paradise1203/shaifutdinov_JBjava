@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
@@ -33,15 +32,11 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom {
                 continue;
             }
             Object[] mas = (Object[]) resultList.get(0);
-            res += ((BigDecimal) mas[0]).doubleValue();
+            res += ((BigInteger) mas[0]).doubleValue();
             count += ((BigInteger) mas[1]).intValueExact();
             hasRes = true;
         }
-        if (hasRes) {
-            return res / count;
-        } else {
-            return (double) 0;
-        }
+        return hasRes ? res / count : (double) 0;
     }
 
     @Override

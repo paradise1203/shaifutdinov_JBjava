@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MedClinicRepository extends CrudRepository<MedClinic, Integer> {
 
-    public MedClinic findByName(String name);
+    MedClinic findByName(String name);
 
 }

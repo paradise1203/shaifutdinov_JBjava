@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface OfficeRepository extends CrudRepository<Office, Integer> {
 
-    public List<Office> findByMedClinic(MedClinic medClinic);
+    List<Office> findByMedClinic(MedClinic medClinic);
 
-    public List<Office> findByCityAndStreet(String city, String street);
+    List<Office> findByCityAndStreet(String city, String street);
 
 }

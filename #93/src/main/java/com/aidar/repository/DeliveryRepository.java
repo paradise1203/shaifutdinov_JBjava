@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface DeliveryRepository extends CrudRepository<Delivery, Integer> {
 
-    public List<Delivery> findByOfficeAndProvider(Office office, Provider provider);
+    List<Delivery> findByOfficeAndProvider(Office office, Provider provider);
 
 }

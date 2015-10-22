@@ -74,11 +74,7 @@ public class MedClinicServiceImpl implements MedClinicService {
             return null;
         }
         double res = personRepository.getAverageSalary(offices);
-        if (res != 0) {
-            return res;
-        } else {
-            return null;
-        }
+        return res != 0 ? res : null;
     }
 
     @Override
@@ -108,11 +104,7 @@ public class MedClinicServiceImpl implements MedClinicService {
             return null;
         }
         double res = personRepository.getAverageCheck(offices);
-        if (res != 0) {
-            return res;
-        } else {
-            return null;
-        }
+        return res != 0 ? res : null;
     }
 
     @Override
@@ -143,21 +135,13 @@ public class MedClinicServiceImpl implements MedClinicService {
             return null;
         }
         double res = personRepository.getAverageCheck(offices);
-        if (res != 0) {
-            return res;
-        } else {
-            return null;
-        }
+        return res != 0 ? res : null;
     }
 
     @Override
     public Office getOffice(String city, String street) {
         List<Office> offices = officeRepository.findByCityAndStreet(city, street);
-        if (offices.isEmpty()) {
-            return null;
-        } else {
-            return offices.get(0);
-        }
+        return offices.isEmpty() ? null : offices.get(0);
     }
 
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeDataRepository extends CrudRepository<EmployeeData, Integer> {
 
-    public EmployeeData findByPerson(Person person);
+    EmployeeData findByPerson(Person person);
 
 }

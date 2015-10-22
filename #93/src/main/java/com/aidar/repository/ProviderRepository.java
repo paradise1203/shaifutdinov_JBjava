@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProviderRepository extends CrudRepository<Provider, Integer> {
 
-    public Provider findByNameAndOffice(String name, Office office);
+    Provider findByNameAndOffice(String name, Office office);
 
 }

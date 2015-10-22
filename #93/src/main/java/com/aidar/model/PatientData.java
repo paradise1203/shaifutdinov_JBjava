@@ -20,7 +20,7 @@ public class PatientData {
     @Column(name = "cost")
     private Integer cost;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
 

@@ -27,7 +27,7 @@ public class Person {
     @Column(name = "type")
     private Integer type;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "office_id")
     private Office office;
 

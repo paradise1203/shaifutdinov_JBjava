@@ -18,7 +18,7 @@ public class Office {
     @Column(name = "street")
     private String street;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "med_clinic_id")
     private MedClinic medClinic;
 

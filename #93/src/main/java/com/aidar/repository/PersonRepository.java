@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Integer>, PersonRepositoryCustom {
 
-    public Person findByFioAndType(String fio, Integer type);
+    Person findByFioAndType(String fio, Integer type);
 
-    public List<Person> findByTypeAndOffice(Integer type, Office office);
+    List<Person> findByTypeAndOffice(Integer type, Office office);
 
 }
