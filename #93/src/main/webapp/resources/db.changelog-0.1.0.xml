@@ -20,10 +20,10 @@
         </comment>
         <sql>
             CREATE TABLE med_clinic (
-            id             INT PRIMARY KEY NOT NULL,
-            name           VARCHAR(255)    NOT NULL,
-            creation_date  DATE            NOT NULL,
-            licence_number INT             NOT NULL
+            id INT NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            creation_date DATE NOT NULL,
+            licence_number INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -45,10 +45,10 @@
         </comment>
         <sql>
             CREATE TABLE office (
-            id            INT PRIMARY KEY NOT NULL,
-            city          VARCHAR(255) NOT NULL,
-            street        VARCHAR(255),
-            med_clinic_id INTEGER      NOT NULL REFERENCES med_clinic (id)
+            id INT NOT NULL,
+            city VARCHAR(255) NOT NULL,
+            street VARCHAR(255),
+            med_clinic_id INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -71,13 +71,13 @@
         </comment>
         <sql>
             CREATE TABLE people (
-            id             INTEGER PRIMARY KEY NOT NULL,
-            fio            VARCHAR(255)        NOT NULL,
-            passport_series VARCHAR(255)        NOT NULL,
-            passport_number VARCHAR(255)        NOT NULL,
-            passport_issued VARCHAR(255)        NOT NULL,
-            type           INTEGER        NOT NULL,
-            office_id      INTEGER             NOT NULL REFERENCES office (id)
+            id INT NOT NULL,
+            fio VARCHAR(255) NOT NULL,
+            passport_series VARCHAR(255) NOT NULL,
+            passport_number VARCHAR(255) NOT NULL,
+            passport_issued VARCHAR(255) NOT NULL,
+            type INT NOT NULL,
+            office_id INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -104,10 +104,10 @@
         </comment>
         <sql>
             CREATE TABLE patient_data (
-            id         INT PRIMARY KEY NOT NULL,
+            id INT NOT NULL,
             visit_date DATE NOT NULL,
-            cost       INT,
-            person_id  INT  NOT NULL REFERENCES people (id)
+            cost INT NOT NULL,
+            person_id INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -131,12 +131,12 @@
         </comment>
         <sql>
             CREATE TABLE stuff_data (
-            id              INT PRIMARY KEY NOT NULL,
-            employment_date DATE            NOT NULL,
-            dismissal_date  DATE,
-            expected_time   INT             NOT NULL,
-            salary          INT             NOT NULL,
-            person_id       INT REFERENCES people (id)
+            id INT NOT NULL,
+            employment_date DATE NOT NULL,
+            dismissal_date DATE,
+            expected_time INT NOT NULL,
+            salary INT NOT NULL,
+            person_id INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -159,10 +159,10 @@
         </comment>
         <sql>
             CREATE TABLE legal_info (
-            id               INT PRIMARY KEY NOT NULL,
-            series           VARCHAR(255) NOT NULL,
-            number           VARCHAR(255) NOT NULL,
-            number_uuid VARCHAR(36)  NOT NULL
+            id INT NOT NULL,
+            series VARCHAR(255) NOT NULL,
+            number VARCHAR(255) NOT NULL,
+            number_uuid VARCHAR(36) NOT NULL
             );
         </sql>
     </changeSet>
@@ -180,18 +180,18 @@
     </changeSet>
 
     <changeSet id="1.13" author="Aidar">
-    <comment>
-        Create provider table.
-    </comment>
-    <sql>
-        CREATE TABLE provider (
-        id        INT PRIMARY KEY NOT NULL,
-        name      VARCHAR(255)    NOT NULL,
-        legal_info_id INT             NOT NULL REFERENCES legal_info (id),
-        office_id INT             NOT NULL REFERENCES office (id)
-        );
-    </sql>
-</changeSet>
+        <comment>
+            Create provider table.
+        </comment>
+        <sql>
+            CREATE TABLE provider (
+            id INT NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            legal_info_id INT NOT NULL ,
+            office_id INT NOT NULL
+            );
+        </sql>
+    </changeSet>
 
     <changeSet id="1.14" author="Aidar">
         <comment>
@@ -211,12 +211,12 @@
         </comment>
         <sql>
             CREATE TABLE delivery (
-            id          INT     NOT NULL PRIMARY KEY,
-            begin_date  DATE    NOT NULL,
-            end_date    DATE,
-            office_id   INTEGER REFERENCES office (id),
-            count       INTEGER NOT NULL,
-            provider_id INT     NOT NULL REFERENCES provider (id)
+            id INT NOT NULL ,
+            begin_date DATE NOT NULL,
+            end_date DATE,
+            office_id INT NOT NULL,
+            count INT NOT NULL,
+            provider_id INT NOT NULL
             );
         </sql>
     </changeSet>
@@ -230,6 +230,86 @@
             INSERT INTO delivery VALUES (2, '2015-09-18', '2015-09-20' , 1, 15, 2);
             INSERT INTO delivery VALUES (3, '2015-08-18', NULL, 2, 20, 3);
             INSERT INTO delivery VALUES (4, '2015-07-18', NULL, 3, 10, 4);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.17" author="Aidar">
+        <comment>
+            Add constraints to med_clinic.
+        </comment>
+        <sql>
+            ALTER TABLE med_clinic ADD PRIMARY KEY (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.18" author="Aidar">
+        <comment>
+            Add constraints to office.
+        </comment>
+        <sql>
+            ALTER TABLE office ADD PRIMARY KEY (id);
+            ALTER TABLE office ADD FOREIGN KEY (med_clinic_id) REFERENCES med_clinic (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.19" author="Aidar">
+        <comment>
+            Add constraints to people.
+        </comment>
+        <sql>
+            ALTER TABLE people ADD PRIMARY KEY (id);
+            ALTER TABLE people ADD FOREIGN KEY (office_id) REFERENCES office (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.20" author="Aidar">
+        <comment>
+            Add constraints to patient_data.
+        </comment>
+        <sql>
+            ALTER TABLE patient_data ADD PRIMARY KEY (id);
+            ALTER TABLE patient_data ADD FOREIGN KEY (person_id) REFERENCES people (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.21" author="Aidar">
+        <comment>
+            Add constraints to stuff_data.
+        </comment>
+        <sql>
+            ALTER TABLE stuff_data ADD PRIMARY KEY (id);
+            ALTER TABLE stuff_data ADD FOREIGN KEY (person_id) REFERENCES people (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.22" author="Aidar">
+        <comment>
+            Add constraints to legal_info.
+        </comment>
+        <sql>
+            ALTER TABLE legal_info ADD PRIMARY KEY (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.23" author="Aidar">
+        <comment>
+            Add constraints to provider.
+        </comment>
+        <sql>
+            ALTER TABLE provider ADD PRIMARY KEY (id);
+            ALTER TABLE provider ADD FOREIGN KEY (legal_info_id) REFERENCES legal_info (id);
+            ALTER TABLE provider ADD FOREIGN KEY (office_id) REFERENCES office (id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="1.24" author="Aidar">
+        <comment>
+            Add constraints to delivery.
+        </comment>
+        <sql>
+            ALTER TABLE delivery ADD PRIMARY KEY (id);
+            ALTER TABLE delivery ADD FOREIGN KEY (office_id) REFERENCES office (id);
+            ALTER TABLE delivery ADD FOREIGN KEY (provider_id) REFERENCES provider (id);
         </sql>
     </changeSet>
 
